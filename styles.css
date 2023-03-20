@@ -1,0 +1,153 @@
+/* reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+#root,
+#__next {
+  isolation: isolate;
+}
+/* reset */
+
+:root {
+  --heading-font: "Arima Madurai", cursive;
+  --body-font: "Roboto Slab", serif;
+  --bg-color: #fff;
+  --font-color: #3d4252;
+  --foot-head-bg: #dadce0;
+}
+.wrapper {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template:
+    "head" 70px
+    "container" 1fr
+    "footer" 70px / 1fr;
+  color: var(--font-color);
+  gap: 10px;
+  height: 100%;
+  width: 100%;
+}
+
+.head {
+  grid-area: head;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-auto-flow: row;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--foot-head-bg);
+}
+
+.logo {
+  max-width: 50px;
+  justify-self: start;
+}
+.title {
+  justify-self: center;
+}
+
+.container {
+  grid-area: container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 300px;
+  margin-top: 50px;
+  gap: 20px;
+}
+
+.paintbox {
+  width: 90%;
+  margin: 0;
+  background-color: var(--font-color);
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 5px;
+  padding: 10px;
+  align-content: center;
+  max-width: 700px;
+  gap: 20px;
+  /* border-radius: 10px;/ */
+}
+
+.menu {
+  background-color: whitesmoke;
+}
+#sketchbox {
+  background-color: whitesmoke;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  grid-template-columns: repeat(var(--value), 1fr);
+  grid-template-rows: repeat(var(--value), 1fr);
+}
+
+#slider {
+  -webkit-appearance: none;
+  width: 200px;
+  background-color: #a1aab4;
+  height: 8px;
+  border-radius: 50px;
+}
+#slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: var(--font-color);
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+}
+
+.skb {
+  aspect-ratio: 1 / 1;
+  /* background-color: #3d4252; */
+  border: 1px solid rgb(0, 0, 0);
+}
+
+/* ------------------------------------------------------- */
+a {
+  text-decoration: none;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: var(--foot-head-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
