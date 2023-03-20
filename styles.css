@@ -136,7 +136,7 @@ h6 {
 .skb {
   aspect-ratio: 1 / 1;
   /* background-color: #3d4252; */
-  border: 1px solid rgb(0, 0, 0);
+  /* border: 1px solid rgb(0, 0, 0); */
 }
 
 /* ------------------------------------------------------- */
