@@ -6,6 +6,8 @@ const clear = document.querySelector(".clear");
 let mousePressed = false;
 let eraseMode = false;
 let drawMode = true;
+let colorMode = "black";
+const colorPicker = document.querySelector("#color-picker");
 
 function updateSketchBox() {
   const value = slider.value;
@@ -40,7 +42,7 @@ function sketchOver(e) {
   } else if (e.type === "mouseover") {
     if (e.target.classList.contains("skb") && mousePressed) {
       if (drawMode) {
-        e.target.style.backgroundColor = "black";
+        e.target.style.backgroundColor = colorMode;
       } else if (eraseMode) {
         e.target.style.backgroundColor = "transparent";
       }
@@ -52,7 +54,7 @@ function sketchOver(e) {
 function sketchClick(e) {
   if (e.target.classList.contains("skb")) {
     if (drawMode) {
-      e.target.style.backgroundColor = "black";
+      e.target.style.backgroundColor = colorMode;
     } else if (eraseMode) {
       e.target.style.backgroundColor = "transparent";
     }
@@ -67,8 +69,16 @@ sketchBox.addEventListener("click", sketchClick);
 
 clear.addEventListener("click", () => {
   let blocks = sketchBox.querySelectorAll(".skb");
-
   for (let block of blocks) {
     block.style.backgroundColor = "transparent";
   }
+  drawMode = true;
+  colorPicker.value = "#000000";
 });
+
+function colorChoice() {
+  colorPicker.addEventListener("change", () => {
+    colorMode = colorPicker.value;
+  });
+}
+colorChoice();
