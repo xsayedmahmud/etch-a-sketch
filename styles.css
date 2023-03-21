@@ -81,6 +81,7 @@ h6 {
 }
 .title {
   justify-self: center;
+  font-family: var(--heading-font);
 }
 
 .container {
@@ -109,7 +110,12 @@ h6 {
 
 .menu {
   background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
 }
+
 #sketchbox {
   background-color: whitesmoke;
   aspect-ratio: 1 / 1;

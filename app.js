@@ -1,7 +1,11 @@
 const sketchBox = document.querySelector("#sketchbox");
 const slider = document.querySelector("#slider");
 const blockNumbers = document.querySelector(".block-num");
+const erase = document.querySelector(".erase");
+const clear = document.querySelector(".clear");
 let mousePressed = false;
+let eraseMode = false;
+let drawMode = true;
 
 function updateSketchBox() {
   const value = slider.value;
@@ -23,44 +27,48 @@ function updateSketchBox() {
 updateSketchBox();
 slider.addEventListener("input", updateSketchBox);
 
-// function changeColor(e) {
-//   sketchBox.addEventListener("mouseup", () => {
-//     mousePressed = false;
-//   });
-//   sketchBox.addEventListener("mousedown", () => {
-//     mousePressed = true;
-//   });
-//   if (mousePressed && e.target.classList.contains("skb")) {
-//     e.target.style.backgroundColor = "black";
-//     e.stopPropagation();
-//   }
-// }
-// sketchBox.addEventListener("mouseover", changeColor);
+erase.addEventListener("click", () => {
+  eraseMode = !eraseMode;
+  drawMode = !drawMode;
+});
 
-// sketchBox.addEventListener("click", (e) => {
-//   if (e.target.classList.contains("skb")) {
-//     e.target.style.backgroundColor = "black";
-//     e.stopPropagation();
-//   }
-// });
-
-function changeColor(e) {
+function sketchOver(e) {
   if (e.type === "mouseup") {
     mousePressed = false;
   } else if (e.type === "mousedown") {
     mousePressed = true;
-  } else if (e.type === "mouseover" || e.type === "click") {
-    if (
-      mousePressed ||
-      (e.type === "click" && e.target.classList.contains("skb"))
-    ) {
-      e.target.style.backgroundColor = "black";
+  } else if (e.type === "mouseover") {
+    if (e.target.classList.contains("skb") && mousePressed) {
+      if (drawMode) {
+        e.target.style.backgroundColor = "black";
+      } else if (eraseMode) {
+        e.target.style.backgroundColor = "transparent";
+      }
       e.stopPropagation();
     }
   }
 }
 
-sketchBox.addEventListener("mouseup", changeColor);
-sketchBox.addEventListener("mousedown", changeColor);
-sketchBox.addEventListener("mouseover", changeColor);
-sketchBox.addEventListener("click", changeColor);
+function sketchClick(e) {
+  if (e.target.classList.contains("skb")) {
+    if (drawMode) {
+      e.target.style.backgroundColor = "black";
+    } else if (eraseMode) {
+      e.target.style.backgroundColor = "transparent";
+    }
+    e.stopPropagation();
+  }
+}
+
+sketchBox.addEventListener("mouseup", sketchOver);
+sketchBox.addEventListener("mousedown", sketchOver);
+sketchBox.addEventListener("mouseover", sketchOver);
+sketchBox.addEventListener("click", sketchClick);
+
+clear.addEventListener("click", () => {
+  let blocks = sketchBox.querySelectorAll(".skb");
+
+  for (let block of blocks) {
+    block.style.backgroundColor = "transparent";
+  }
+});
