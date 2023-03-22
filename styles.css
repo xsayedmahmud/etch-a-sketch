@@ -132,6 +132,16 @@ h6 {
   border-radius: 5px;
 }
 
+.active-btn {
+  color: whitesmoke;
+  background-color: var(--font-color);
+}
+
+.btn:hover {
+  color: whitesmoke;
+  background-color: var(--font-color);
+}
+
 #sketchbox {
   background-color: whitesmoke;
   aspect-ratio: 1 / 1;

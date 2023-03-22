@@ -1,13 +1,14 @@
 const sketchBox = document.querySelector("#sketchbox");
 const slider = document.querySelector("#slider");
 const blockNumbers = document.querySelector(".block-num");
-const erase = document.querySelector(".erase");
+const draw = document.querySelector("#draw");
+const erase = document.querySelector("#erase");
 const clear = document.querySelector(".clear");
-let mousePressed = false;
-let eraseMode = false;
-let drawMode = true;
-let colorMode = "black";
+let buttons = document.querySelectorAll(".btn");
 const colorPicker = document.querySelector("#color-picker");
+let mousePressed = false;
+let mode = "draw";
+let colorMode = "black";
 
 function updateSketchBox() {
   const value = slider.value;
@@ -30,8 +31,18 @@ updateSketchBox();
 slider.addEventListener("input", updateSketchBox);
 
 erase.addEventListener("click", () => {
-  eraseMode = !eraseMode;
-  drawMode = !drawMode;
+  mode = "erase";
+});
+
+draw.addEventListener("click", () => {
+  mode = "draw";
+});
+
+buttons.forEach(function (button) {
+  button.addEventListener("click", (e) => {
+    buttons.forEach((btn) => btn.classList.remove("active-btn"));
+    e.target.classList.add("active-btn");
+  });
 });
 
 function sketchOver(e) {
@@ -41,9 +52,9 @@ function sketchOver(e) {
     mousePressed = true;
   } else if (e.type === "mouseover") {
     if (e.target.classList.contains("skb") && mousePressed) {
-      if (drawMode) {
+      if (mode === "draw") {
         e.target.style.backgroundColor = colorMode;
-      } else if (eraseMode) {
+      } else if (mode === "erase") {
         e.target.style.backgroundColor = "transparent";
       }
       e.stopPropagation();
@@ -53,9 +64,9 @@ function sketchOver(e) {
 
 function sketchClick(e) {
   if (e.target.classList.contains("skb")) {
-    if (drawMode) {
+    if (mode === "draw") {
       e.target.style.backgroundColor = colorMode;
-    } else if (eraseMode) {
+    } else if (mode === "erase") {
       e.target.style.backgroundColor = "transparent";
     }
     e.stopPropagation();
