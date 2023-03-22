@@ -6,9 +6,12 @@ const erase = document.querySelector("#erase");
 const clear = document.querySelector(".clear");
 let buttons = document.querySelectorAll(".btn");
 const colorPicker = document.querySelector("#color-picker");
+const rainbow = document.querySelector("#rainbow");
+const colorVal = document.querySelector("#color-val");
 let mousePressed = false;
 let mode = "draw";
-let colorMode = "black";
+let colorMode = "colorPicker";
+let colorChoice = "#000000";
 
 function updateSketchBox() {
   const value = slider.value;
@@ -45,6 +48,28 @@ buttons.forEach(function (button) {
   });
 });
 
+function random(number) {
+  return Math.floor(Math.random() * number);
+}
+
+function rainbowColor() {
+  rndCol = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
+  return rndCol;
+}
+colorVal.textContent = colorPicker.value;
+
+colorPicker.addEventListener("input", () => {
+  colorMode = "colorPicker";
+  colorChoice = colorPicker.value;
+  mode = "draw";
+  colorVal.textContent = colorPicker.value;
+});
+
+rainbow.addEventListener("click", () => {
+  colorMode = "rainbowCol";
+  mode = "draw";
+});
+
 function sketchOver(e) {
   if (e.type === "mouseup") {
     mousePressed = false;
@@ -53,9 +78,18 @@ function sketchOver(e) {
   } else if (e.type === "mouseover") {
     if (e.target.classList.contains("skb") && mousePressed) {
       if (mode === "draw") {
-        e.target.style.backgroundColor = colorMode;
+        switch (colorMode) {
+          case "colorPicker":
+            e.target.style.backgroundColor = colorChoice;
+            break;
+          case "rainbowCol":
+            e.target.style.backgroundColor = rainbowColor();
+            break;
+          default:
+            e.target.style.backgroundColor = "#000000";
+        }
       } else if (mode === "erase") {
-        e.target.style.backgroundColor = "transparent";
+        e.target.style.backgroundColor = "";
       }
       e.stopPropagation();
     }
@@ -65,9 +99,18 @@ function sketchOver(e) {
 function sketchClick(e) {
   if (e.target.classList.contains("skb")) {
     if (mode === "draw") {
-      e.target.style.backgroundColor = colorMode;
+      switch (colorMode) {
+        case "colorPicker":
+          e.target.style.backgroundColor = colorChoice;
+          break;
+        case "rainbowCol":
+          e.target.style.backgroundColor = rainbowColor();
+          break;
+        default:
+          e.target.style.backgroundColor = "#000000";
+      }
     } else if (mode === "erase") {
-      e.target.style.backgroundColor = "transparent";
+      e.target.style.backgroundColor = "";
     }
     e.stopPropagation();
   }
@@ -81,15 +124,11 @@ sketchBox.addEventListener("click", sketchClick);
 clear.addEventListener("click", () => {
   let blocks = sketchBox.querySelectorAll(".skb");
   for (let block of blocks) {
-    block.style.backgroundColor = "transparent";
+    block.style.backgroundColor = "";
   }
-  drawMode = true;
+  mode = "draw";
   colorPicker.value = "#000000";
+  colorVal.textContent = colorPicker.value;
+  colorMode = "colorPicker";
+  colorChoice = colorPicker.value;
 });
-
-function colorChoice() {
-  colorPicker.addEventListener("change", () => {
-    colorMode = colorPicker.value;
-  });
-}
-colorChoice();

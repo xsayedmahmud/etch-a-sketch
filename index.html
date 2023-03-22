@@ -35,7 +35,18 @@
       <div class="container">
         <div class="paintbox">
           <div class="menu">
-            <input type="color" name="color-picker" id="color-picker" />
+            <div class="color-val-picker">
+              <p id="color-val"></p>
+              <input
+                type="color"
+                name="color-picker"
+                id="color-picker"
+                class="col-btn color-picker btn"
+              />
+            </div>
+            <button class="rainbow btn col-btn" id="rainbow">
+              <i class="fa-solid fa-rainbow"></i> Rainbow
+            </button>
             <button class="draw btn" id="draw">
               <i class="fa-solid fa-paintbrush"></i> Draw
             </button>
@@ -54,7 +65,7 @@
           name="slider"
           id="slider"
           min="1"
-          max="64"
+          max="100"
           value="32"
         />
       </div>

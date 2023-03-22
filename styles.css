@@ -99,11 +99,12 @@ h6 {
   margin: 0;
   background-color: var(--font-color);
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: minmax(100px, 1fr) minmax(300px, 4fr);
   gap: 5px;
   padding: 10px;
   align-content: center;
   max-width: 700px;
+  min-width: 450px;
   gap: 20px;
   /* border-radius: 10px;/ */
 }
@@ -115,26 +116,49 @@ h6 {
   align-items: center;
   padding: 10px;
   gap: 15px;
+  font-family: var(--body-font);
+  font-size: 0.89rem;
+}
+
+.color-val-picker {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 #color-picker {
-  border: 2px solid var(--font-color);
-  background-color: whitesmoke;
-  border-radius: 5px;
-  /* margin-bottom: 40px; */
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  padding: 0;
+}
+
+#color-picker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+#color-picker::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
 }
 
 .btn {
-  padding: 4px 15px;
+  padding: 4px 7px;
   width: 100px;
   background-color: whitesmoke;
   border: 2px solid var(--font-color);
   border-radius: 5px;
+  /* font-size: 0.7rem; */
 }
 
 .active-btn {
   color: whitesmoke;
   background-color: var(--font-color);
+  /* transform: scale(1.2); */
 }
 
 .btn:hover {
@@ -148,6 +172,7 @@ h6 {
   display: grid;
   grid-template-columns: repeat(var(--value), 1fr);
   grid-template-rows: repeat(var(--value), 1fr);
+  cursor: crosshair;
 }
 
 #slider {
@@ -167,8 +192,6 @@ h6 {
 
 .skb {
   aspect-ratio: 1 / 1;
-  /* background-color: #3d4252; */
-  /* border: 1px solid rgb(0, 0, 0); */
 }
 
 /* ------------------------------------------------------- */
