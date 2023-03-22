@@ -23,7 +23,7 @@ function updateSketchBox() {
 
   for (let i = 0; i < value * value; i++) {
     const sketchBlock = document.createElement("div");
-    sketchBlock.classList.add("skb");
+    sketchBlock.classList.add("sketchBlock");
     sketchBox.appendChild(sketchBlock);
     blockNumbers.textContent = `${value} x ${value}`;
     blockNumbers.style.setProperty("font-size", "1.5`rem");
@@ -76,7 +76,7 @@ function sketchOver(e) {
   } else if (e.type === "mousedown") {
     mousePressed = true;
   } else if (e.type === "mouseover") {
-    if (e.target.classList.contains("skb") && mousePressed) {
+    if (e.target.classList.contains("sketchBlock") && mousePressed) {
       if (mode === "draw") {
         switch (colorMode) {
           case "colorPicker":
@@ -97,7 +97,7 @@ function sketchOver(e) {
 }
 
 function sketchClick(e) {
-  if (e.target.classList.contains("skb")) {
+  if (e.target.classList.contains("sketchBlock")) {
     if (mode === "draw") {
       switch (colorMode) {
         case "colorPicker":
@@ -122,7 +122,7 @@ sketchBox.addEventListener("mouseover", sketchOver);
 sketchBox.addEventListener("click", sketchClick);
 
 clear.addEventListener("click", () => {
-  let blocks = sketchBox.querySelectorAll(".skb");
+  let blocks = sketchBox.querySelectorAll(".sketchBlock");
   for (let block of blocks) {
     block.style.backgroundColor = "";
   }
